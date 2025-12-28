@@ -1,0 +1,159 @@
+# Finite Precision
+
+A numerical computation engine built in Java to explore how mathematically exact identities behave under finite-precision arithmetic.
+
+This project evaluates **Euler’s identity**
+
+[
+e^{i\pi} + 1 = 0
+]
+
+not as a mathematical proof, but as a **numerical experiment**—measuring how close a computer can actually get to zero when all computations are approximations.
+
+---
+
+## Motivation
+
+In mathematics, many results are exact by definition.
+In software, *nothing* is exact.
+
+Real numbers are approximated, infinite series are truncated, and rounding decisions quietly influence outcomes. This project exists to make those effects **visible and measurable**, rather than hidden behind library calls.
+
+Euler’s identity is a perfect test case because it combines:
+
+* exponentials
+* trigonometry
+* complex numbers
+* π
+
+Any numerical weakness shows up immediately.
+
+---
+
+## What This Project Is (and Is Not)
+
+### This project **is**:
+
+* a numerical computing experiment
+* an exploration of precision, convergence, and error
+* an implementation from first principles
+
+### This project is **not**:
+
+* a mathematical proof of Euler’s identity
+* a visualization tool
+* a wrapper around existing math libraries
+
+All core math (exp, sin, cos, complex arithmetic) is implemented manually using Taylor series and controlled precision.
+
+---
+
+## Key Concepts Explored
+
+* Finite precision arithmetic
+* Taylor series approximation
+* Error accumulation and convergence
+* Precision vs performance tradeoffs
+* Complex number representation
+
+---
+
+## Project Structure
+
+```
+finite-precision/
+├── src/
+│   ├── complex/
+│   │   └── Complex.java          // Complex number representation & arithmetic
+│   ├── math/
+│   │   ├── TaylorExp.java        // exp(x) via Taylor series
+│   │   ├── TaylorSin.java        // sin(x) via Taylor series
+│   │   ├── TaylorCos.java        // cos(x) via Taylor series
+│   │   └── ComplexExp.java       // e^(iθ) using Euler formulation
+│   ├── util/
+│   │   └── PrecisionContext.java // Precision, rounding, convergence control
+│   └── engine/
+│       └── EulerExperiment.java  // Experiment runner
+```
+
+Each component has a single responsibility, keeping numerical decisions explicit and isolated.
+
+---
+
+## Implementation Overview
+
+### Precision Control
+
+All numerical behavior is governed by a central `PrecisionContext`, which defines:
+
+* decimal precision
+* rounding mode
+* convergence threshold (`epsilon`)
+* maximum iterations
+
+This ensures precision is a *deliberate choice*, not an implicit default.
+
+---
+
+### Mathematical Functions
+
+* `exp(x)`, `sin(x)`, and `cos(x)` are implemented using Taylor series
+* Each function reuses the previous term to improve numerical stability
+* Computation stops when additional terms fall below a precision-aware threshold
+
+---
+
+### Complex Numbers
+
+Complex numbers are represented explicitly as two `BigDecimal` values.
+All arithmetic is implemented manually to avoid hidden precision behavior.
+
+---
+
+### Euler’s Identity Experiment
+
+The final experiment computes:
+
+[
+e^{i\pi} + 1
+]
+
+The result is never exactly zero. Instead, the **residual error** is measured and reported, demonstrating the limits imposed by finite precision.
+
+---
+
+## Sample Output
+
+```
+e^(iπ) + 1 ≈ -1E-19 + 2.3843587967797675957E-16i
+Magnitude of error ≈ 2.3843590064797417306E-16
+```
+
+Increasing precision reduces the error, but it never disappears completely.
+
+---
+
+## Key Takeaway
+
+Mathematics is continuous.
+Computers are discrete.
+
+Correct software is not about reproducing ideal formulas—it’s about understanding how those formulas behave under real constraints. This project explores that gap deliberately and transparently.
+
+---
+
+## Possible Extensions
+
+* Approximate π numerically instead of hardcoding
+* Compare results across different precision levels
+* Log error trends to CSV
+* Implement arbitrary-precision benchmarking
+* Extend to general complex exponentials
+
+---
+
+## Author
+
+Built as a self-driven exploration into numerical computation and systems thinking.
+
+---
