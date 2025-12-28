@@ -9,6 +9,7 @@ public class EulerExperiment {
 
     public static void main(String[] args) {
 
+
         MathContext mc = new MathContext(10);
 
         Complex a = new Complex(
@@ -24,5 +25,8 @@ public class EulerExperiment {
         Complex result = a.multiply(b, mc);
 
         System.out.println(result);
+
+
     }
+
 }
