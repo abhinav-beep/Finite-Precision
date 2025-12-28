@@ -10,22 +10,22 @@ public class EulerExperiment {
 
     public static void main(String[] args) {
 
-        // 1️⃣ Define numerical rules
+        // 1 Define numerical rules
         PrecisionContext pc = new PrecisionContext(20, 1000);
 
-        // 2️⃣ Define π (hardcoded for now)
+        // 2 Define π (hardcoded for now)
         BigDecimal pi = new BigDecimal("3.141592653589793");
 
-        // 3️⃣ Compute e^(iπ)
+        // 3 Compute e^(iπ)
         Complex expIpi = ComplexExp.expI(pi, pc);
 
-        // 4️⃣ Add 1
+        // 4 Add 1
         Complex result = expIpi.add(
                 new Complex(BigDecimal.ONE, BigDecimal.ZERO),
                 pc.mc()
         );
 
-        // 5️⃣ Print result
+        // 5 Print result
         System.out.println("e^(iπ) + 1 ≈ " + result);
         System.out.println("Magnitude of error ≈ " + result.magnitude(pc.mc()));
     }
