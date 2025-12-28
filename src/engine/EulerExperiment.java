@@ -13,7 +13,7 @@ public class EulerExperiment {
         // 1 Define numerical rules
         PrecisionContext pc = new PrecisionContext(20, 1000);
 
-        // 2 Define π (hardcoded for now)
+        // 2 Define π
         BigDecimal pi = new BigDecimal("3.141592653589793");
 
         // 3 Compute e^(iπ)
